@@ -1,77 +1,75 @@
 import './root.scss';
 
 import React from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 
 import Movies from '../movies/movies';
+import LetsPlay from '../letsPlay/letsPlay';
+import Playing from '../playing/playing';
+import Header from '../header/header'
+
+import Genres from '../genres/genres'
 import TMDB from '../../core/tmdb';
+import GameOver from '../gameover/gameover';
 
 class Root extends React.Component {
 
   constructor() {
     super();
 
-    this.handleClick          = this.handleClick.bind(this);
-    this.getMostPopularMovies = this.getMostPopularMovies.bind(this);
+    console.info();
+    // this.handleClick = this.handleClick.bind(this);
+    // this.getGenres = this.getGenres.bind(this);
 
     this.state = {
-      loading: false
+      loading: false,
+      mode: 'playing'//playing//game over//leadboard//lets play
+
+
     }
   }
 
-  getMostPopularMovies() {
-    this.setState({
-      loading: true
-    });
-
-    TMDB.get('/discover/movie?vote_average=6')
-      .then((data) => {
-        // log `data` here to inspect the fetched data
-        console.info(data);
-
-        this.setState({
-          loading: false
-        });
-
-        this.props.setMovies(data.results);
-      });
-  }
-
-  /*
-   What movies are in theatres?
-
-   URL: /discover/movie?primary_release_date.gte=2014-09-15&primary_original_language.lte=en
-
-
-   */
-
-
-  handleClick(e) {
-    this.getMostPopularMovies();
-  }
 
   render() {
-    return (
-      <div className="root">
-        <h1 className="root-heading"
-            onClick={ this.handleClick }>
-          TMDB Hackathon!
-        </h1>
+    console.info(this.props.gamemode);
+    if (this.props.gamemode === 'lets play') {
 
-        <p>Click the heading to see some action!</p>
-        <p>Fetched movies: { this.props.movies.length }</p>
+      return (
 
-        { this.state.loading && 'Loading...' }
-
-        <Movies />
-      </div>
-    );
+        <div className="root">
+          <LetsPlay/>
+        </div>
+      );
+    }
+    if (this.props.gamemode === 'playing') {
+      return (
+        <div className="root">
+          <Playing/>
+        </div>
+      )
+    }
+    if (this.props.gamemode === 'gameover') {
+      console.info('good');
+      return (
+        <div className="root">
+          <GameOver/>
+        </div>
+      )
+    }
+    else {
+      console.info('bad');
+      return null;
+    }
   }
+
+
 }
 
-function mapStateToProps({ movies }) {
+function mapStateToProps({movies, genres, gamemode}) {
   return {
-    movies: movies
+    movies: movies,
+    genres: genres,
+    gamemode: gamemode
   };
 }
 
@@ -80,6 +78,12 @@ function mapDispatchToProps(dispatch) {
     setMovies(data) {
       dispatch({
         type: 'SET_MOVIES',
+        data: data
+      });
+    },
+    setGenres(data) {
+      dispatch({
+        type: 'SET_GARNERS',
         data: data
       });
     }

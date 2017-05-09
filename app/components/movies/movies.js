@@ -19,11 +19,14 @@ class Movies extends React.Component {
     if (!this.props.movies.length) {
       return null;
     }
+    console.info(this.props.movies);
 
     return (
       <div className="movies">
         <h2>Most Popular Movies</h2>
         { this.renderMoviesList() }
+          <h2>movies!!</h2>
+          { this.renderMoviesList() }
       </div>
     );
   }

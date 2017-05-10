@@ -1,6 +1,6 @@
 const initialData = 'lets play';
 
-export default function gamesmode(data = initialData, action) {
+export default function gamesMode(data = initialData, action) {
   if (action.type === 'GAME_MODE') {
     return action.data;
   }

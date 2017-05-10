@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import TMDB from '../../core/tmdb';
 import Header from '../header/header'
 import Question from '../question-container/question'
+import QuestionTest from '../question-container/questionsTest'
 
 
 class Playing extends React.Component {
@@ -23,7 +24,7 @@ class Playing extends React.Component {
     return (
       <div className="playing">
         <Header/>
-        <Question/>
+        <QuestionTest/>
       </div>
     );
   }

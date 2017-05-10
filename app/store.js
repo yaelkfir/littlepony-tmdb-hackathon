@@ -2,15 +2,16 @@ import { createStore, combineReducers } from 'redux';
 
 import movies from './reducers/movies';
 import genres from './reducers/genres';
-import highscore from "./reducers/highscore";
-import gamemode from "./reducers/gamemode";
+import highScore from "./reducers/highscore";
+import gameMode from "./reducers/gamemode";
+import QuestionTest from "./reducers/questionsTestReducer";
 
 const reducer = combineReducers({
+  QuestionTest,
   movies,
   genres,
-  highscore,
-  gamemode
-
+  highScore,
+  gameMode
 });
 
 const store = createStore(

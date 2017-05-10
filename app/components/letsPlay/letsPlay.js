@@ -21,7 +21,7 @@ class LetsPlay extends React.Component {
 put your knowledge to the test..</span>
         <span
           className="btn"
-          onClick= {() => { this.props.startgame('playing')} }
+          onClick= {() => { this.props.startGame('playing')} }
         >lest play</span>
 
       </div>
@@ -37,7 +37,7 @@ function mapStateToProps({ movies }) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    startgame(data) {
+    startGame(data) {
       dispatch({
         type: 'GAME_MODE',
         data: data

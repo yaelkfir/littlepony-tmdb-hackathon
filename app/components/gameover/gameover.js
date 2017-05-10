@@ -17,10 +17,10 @@ class GameOver extends React.Component {
         <Header/>
         <div className="score-container">
           <h3>Game Over</h3>
-          <p className="score"><span>Your Score</span><br/>{this.props.highscore}</p>
+          <p className="score"><span>Your Score</span><br/>{this.props.highScore}</p>
           <span
             className="btn"
-            onClick= {() => {this.props.startgame('playing');
+            onClick= {() => {this.props.startGame('playing');
               this.props.resetCounter();
             }}>Start New Game</span>
         </div>
@@ -29,10 +29,10 @@ class GameOver extends React.Component {
   }
 }
 
-function mapStateToProps({ movies ,highscore}) {
+function mapStateToProps({ movies ,highScore}) {
   return {
     movies: movies,
-    highscore:highscore
+    highScore:highScore
   };
 }
 
@@ -40,14 +40,13 @@ function mapStateToProps({ movies ,highscore}) {
 function mapDispatchToProps(dispatch) {
   return {
 
-    startgame(data) {
+    startGame(data) {
       dispatch({
         type: 'GAME_MODE',
         data: data
       })
     },
     resetCounter(){
-
       dispatch({
         type: 'RESET_SCORE'
       })

@@ -14,17 +14,6 @@ class Question extends React.Component {
       question: null,
       type: 'actor' //movie
     };
-    //state can be array of react components(it gets it own false data)
-
-    /*
-     this.state = {
-     right: null,
-     wrong: null,
-     question: null,
-     type: 'actor' //movie
-     }
-
-     */
 
     console.info(this.state);
   }
@@ -39,6 +28,9 @@ class Question extends React.Component {
 
   }
 
+  randomNum(num){
+    return Math.floor(Math.random() * (num))
+  }
 
   componentDidUpdate(prevProps, prevState) {
 
@@ -50,15 +42,12 @@ class Question extends React.Component {
     if (prevState.type === 'movie' && this.state.type === 'actor') {
       this.actorBestKnowForMovie();
     }
-
     //next question
 
   }
 
   //qustions actor
   actorBestKnowForMovie() {
-    //actor best known for miove
-    //‬let random = ;
 
     const apiKey = '24d87d4e264322cbb28c3b1f2a2b3721';
     const popPerson = `/person/popular?api_key=${apiKey}&language=en-US&page=1`;
@@ -67,19 +56,16 @@ class Question extends React.Component {
     const type = this.state.type === 'movie' ? popMovie : popPerson;
     TMDB.get(type)
       .then((data) => {
-        // this.props.setMovies(data.results);
 
-        let zeroTwoNumbers = Math.floor(Math.random() * (2 + 1));
-        let zeroNineteen = Math.floor(Math.random() * (19));
-        let newZeroNineteen = Math.floor(Math.random() * (19));
-        let backupZeroNineteen = Math.floor(Math.random() * (19));
-
+        let zeroNineteen = this.randomNum(19);
+        let newZeroNineteen = this.randomNum(19);
+        let backupZeroNineteen = this.randomNum(19);
 
         let falseyActor = data.results[newZeroNineteen].profile_path;
         let falseyActorName = data.results[newZeroNineteen].name;
         let turthyActor = data.results[zeroNineteen].profile_path;
         let turthyActorName = data.results[zeroNineteen].name;
-        let movie = data.results[zeroNineteen].known_for[zeroTwoNumbers].title;
+        let movie = data.results[zeroNineteen].known_for[this.randomNum(2+1)].title;
 
         if (zeroNineteen === newZeroNineteen) {
           falseyActor = data.results[backupZeroNineteen];
@@ -90,7 +76,7 @@ class Question extends React.Component {
           right: turthyActor,
           rightname: turthyActorName,
           wrong: falseyActor,
-          wrongname:falseyActorName,
+          wrongname: falseyActorName,
           question: `which actor is best know for ${movie}?`
         })
 
@@ -105,12 +91,15 @@ class Question extends React.Component {
     const popMovie = '/discover/movie?sort_by=popularity.desc';
 
     const type = this.state.type === 'movie' ? popMovie : popPerson;
-    console.info(type);
+
+    console.info('type',type);
 
     TMDB.get(type)
       .then((data) => {
-        // this.props.setMovies(data.results);
+        console.info('type',type);
 
+        // this.props.setMovies(data.results);
+        console.info('data',data);
         let zeroNineteen = Math.floor(Math.random() * (19));
         let newZeroNineteen = Math.floor(Math.random() * (19));
         let backupZeroNineteen = Math.floor(Math.random() * (19));
@@ -121,9 +110,6 @@ class Question extends React.Component {
         let firstMovieName = data.results[zeroNineteen].title;
         let secondMovieName = data.results[newZeroNineteen].title;
 
-        let turthyActorName = data.results[zeroNineteen].name;
-
-        console.info('movies', data.results);
         if (zeroNineteen === newZeroNineteen) {
           secondMovie = data.results[backupZeroNineteen];
         }
@@ -134,7 +120,7 @@ class Question extends React.Component {
             right: firstMovie.poster_path,
             wrong: secondMovie.poster_path,
             rightname: firstMovieName,
-            wrongname:secondMovieName,
+            wrongname: secondMovieName,
             question: `which movie is more popular?`
           });
         }
@@ -143,17 +129,16 @@ class Question extends React.Component {
             right: secondMovie.poster_path,
             wrong: firstMovie.poster_path,
             rightname: secondMovieName,
-            wrongname:firstMovieName,
+            wrongname: firstMovieName,
             question: `which movie is more popular?`
           })
         }
-
       });
   }
 
   checkRightOrWrong(e) {
     console.info(e.target.textContent);
-    let counter = Number(this.props.highscore);
+    let counter = Number(this.props.highScore);
 
     if (e.target.id === this.state.right) {
       counter = counter + 1;
@@ -165,7 +150,7 @@ class Question extends React.Component {
       this.setState({
         type: type,
         right: null,
-        rightname:null,
+        rightname: null,
         wrong: null,
         wrongname: null,
         question: null
@@ -192,7 +177,7 @@ class Question extends React.Component {
           <div className="lest"><h3>{this.state.question}</h3></div>
           <div className="answers-container">
             <div className="answer"
-title={randomAnswerPresentence ? rightName : wrongName}
+                 title={randomAnswerPresentence ? rightName : wrongName}
                  style={{backgroundImage: `url("http://image.tmdb.org/t/p/w185/${randomAnswerPresentence ? rightPic : wrongPic}"`}}
                  id={randomAnswerPresentence ? rightPic : wrongPic}
                  onClick={
@@ -203,7 +188,6 @@ title={randomAnswerPresentence ? rightName : wrongName}
             <div className="answer"
                  style={{backgroundImage: `url("http://image.tmdb.org/t/p/w185/${!randomAnswerPresentence ? rightPic : wrongPic}"`}}
                  title={!randomAnswerPresentence ? rightName : wrongName}
-
                  id={!randomAnswerPresentence ? rightPic : wrongPic}
                  onClick={(e) => {
                    this.checkRightOrWrong(e);
@@ -219,10 +203,10 @@ title={randomAnswerPresentence ? rightName : wrongName}
   }
 }
 
-function mapStateToProps({movies, highscore}) {
+function mapStateToProps({movies, highScore}) {
   return {
     movies: movies,
-    highscore: highscore
+    highScore: highScore
 
   };
 }

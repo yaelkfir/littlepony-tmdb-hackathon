@@ -3,13 +3,8 @@ import './root.scss';
 import React from 'react';
 import {connect} from 'react-redux';
 
-import Movies from '../movies/movies';
 import LetsPlay from '../letsPlay/letsPlay';
 import Playing from '../playing/playing';
-import Header from '../header/header'
-
-import Genres from '../genres/genres'
-import TMDB from '../../core/tmdb';
 import GameOver from '../gameover/gameover';
 
 class Root extends React.Component {
@@ -18,21 +13,17 @@ class Root extends React.Component {
     super();
 
     console.info();
-    // this.handleClick = this.handleClick.bind(this);
-    // this.getGenres = this.getGenres.bind(this);
 
     this.state = {
       loading: false,
-      mode: 'playing'//playing//game over//leadboard//lets play
-
-
+      mode: 'playing'
     }
   }
 
 
   render() {
-    console.info(this.props.gamemode);
-    if (this.props.gamemode === 'lets play') {
+    console.info('render root',this.props.gameMode);
+    if (this.props.gameMode === 'lets play') {
 
       return (
 
@@ -41,21 +32,23 @@ class Root extends React.Component {
         </div>
       );
     }
-    if (this.props.gamemode === 'playing') {
+
+    if (this.props.gameMode === 'playing') {
       return (
         <div className="root">
           <Playing/>
         </div>
       )
     }
-    if (this.props.gamemode === 'gameover') {
-      console.info('good');
+
+    if (this.props.gameMode === 'gameover') {
       return (
         <div className="root">
           <GameOver/>
         </div>
       )
     }
+
     else {
       console.info('bad');
       return null;
@@ -65,11 +58,11 @@ class Root extends React.Component {
 
 }
 
-function mapStateToProps({movies, genres, gamemode}) {
+function mapStateToProps({movies, genres, gameMode}) {
   return {
     movies: movies,
     genres: genres,
-    gamemode: gamemode
+    gameMode: gameMode
   };
 }
 

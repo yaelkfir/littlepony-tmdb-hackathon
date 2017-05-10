@@ -15,17 +15,17 @@ class Header extends React.Component {
           <span className="menu">menu</span>
           <div className="logo"/>
 
-          <span>{`score: ${this.props.highscore}`}</span>
+          <span>{`score: ${this.props.highScore}`}</span>
         </nav>
       </header>
     );
   }
 }
 
-function mapStateToProps({movies, highscore}) {
+function mapStateToProps({movies, highScore}) {
   return {
     movies: movies,
-    highscore: highscore
+    highScore: highScore
   };
 }
 

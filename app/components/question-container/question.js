@@ -13,7 +13,18 @@ class Question extends React.Component {
       wrong: null,
       question: null,
       type: 'actor' //movie
-    }
+    };
+    //state can be array of react components(it gets it own false data)
+
+    /*
+     this.state = {
+     right: null,
+     wrong: null,
+     question: null,
+     type: 'actor' //movie
+     }
+
+     */
 
     console.info(this.state);
   }
@@ -40,6 +51,7 @@ class Question extends React.Component {
       this.actorBestKnowForMovie();
     }
 
+    //next question
 
   }
 
@@ -139,7 +151,7 @@ class Question extends React.Component {
       });
   }
 
-  answerRightWrong(e) {
+  checkRightOrWrong(e) {
     console.info(e.target.textContent);
     let counter = Number(this.props.highscore);
 
@@ -185,7 +197,7 @@ title={randomAnswerPresentence ? rightName : wrongName}
                  id={randomAnswerPresentence ? rightPic : wrongPic}
                  onClick={
                    (e) => {
-                     this.answerRightWrong(e)
+                     this.checkRightOrWrong(e);
                    }
                  }/>
             <div className="answer"
@@ -194,7 +206,7 @@ title={randomAnswerPresentence ? rightName : wrongName}
 
                  id={!randomAnswerPresentence ? rightPic : wrongPic}
                  onClick={(e) => {
-                   this.answerRightWrong(e)
+                   this.checkRightOrWrong(e);
                  }}/>
           </div>
         </div>
@@ -216,6 +228,7 @@ function mapStateToProps({movies, highscore}) {
 }
 
 function mapDispatchToProps(dispatch) {
+  //maybe new set
   return {
     setMovies(data) {
       dispatch({

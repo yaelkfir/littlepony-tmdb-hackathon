@@ -52,12 +52,17 @@ class Root extends React.Component {
   render() {
     console.info('render root',this.props.gameMode);
     if (this.props.gameMode === 'lets play') {
+//set
+//id:271110 civil war best pic i randomly found
+//id:135397, title:"Jurassic World" for cover
+
+// id:135397, title:"Jurassic World" for lets play
+// id:271110, for score play
 
       return (
 
         <div className="root">
-          <LetsPlay
-            getBackImg = {this.getBackImg}/>
+          <LetsPlay/>
         </div>
       );
     }

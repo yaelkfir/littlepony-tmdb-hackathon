@@ -54,7 +54,7 @@ class GameOver extends React.Component {
 
     if (this.state.img !== null) {
     return (
-      <div className="game-over"
+      <div className="img-backgrounds game-over"
            style={{backgroundImage:img}}>
         <Header/>
         <div className="score-container">

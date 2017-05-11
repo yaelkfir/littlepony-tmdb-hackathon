@@ -58,7 +58,7 @@ class Playing extends React.Component {
 
     if (this.state.img !== null) {
     return (
-      <div className="playing"
+      <div className="img-backgrounds playing"
            style={{backgroundImage:img}}>
         <Header/>
         <QuestionTest/>

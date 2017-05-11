@@ -56,7 +56,7 @@ class LetsPlay extends React.Component {
 
     if (this.state.img !== null) {
       return (
-        <div className="lets-play"
+        <div className="img-backgrounds lets-play"
              style={{backgroundImage:img}}>
           <div className="logo"/>
           <span>Are you a filmhound? <br/>

@@ -15,7 +15,6 @@ class Root extends React.Component {
   constructor() {
     super();
 
-    console.info();
 
     this.state = {
       loading: false,
@@ -28,20 +27,34 @@ class Root extends React.Component {
   }
 
   componentDidMount() {
-    this.getBackImg(this.props.backImg);
+    this.getBackImg();
   }
 
-  getBackImg() {
-    // const apiKey = '24d87d4e264322cbb28c3b1f2a2b3721';
-    // const movie = `/movie/${this.props.backImg}?api_key=${apiKey}`;
+  componentDidUpdate(prevProps){
+    console.info('componentDidUpdate');
+
+    console.info('prevProps',prevProps.gameMode);
+    console.info('this.props',this.props.gameMode);
+    if(prevProps.gameMode !== this.props.gameMode){
+
+      this.getBackImg(prevProps.backImg);
+      console.info('prevProps',prevProps.backImg);
+      console.info('this.props',this.props.backImg);
+
+
+    }
+  }
+
+  getBackImg(prevProps) {
 
     const popMovie = '/discover/movie?sort_by=popularity.desc';
 
-    const picUrl = 'url("http://image.tmdb.org/t/p/w1000/';
+    const picUrl = 'url("http://image.tmdb.org/t/p/w500/';
     let indexOne = this.randomNum(19);
 
     TMDB.get(popMovie)
       .then((data) => {
+        console.info(data);
 
         let Movie = data.results[indexOne];
         const MoviePic = Movie.poster_path;
@@ -51,33 +64,6 @@ class Root extends React.Component {
           img: backGroundImg
         })
       })
-    //set
-//id:271110 civil war best pic i randomly found
-//id:135397, title:"Jurassic World" for cover
-
-// id:135397, title:"Jurassic World" for lets play
-// id:271110, for score play
-    /*
-     const popPerson = `/person/popular?api_key=${apiKey}&language=en-US&page=1`;
-     */
-    /*
-     TMDB.get(movie)
-     .then((data) => {
-
-     let Movie = data;
-     console.info('Movie', Movie);
-
-     const MoviePic = Movie.poster_path;
-     console.info('MoviePic', MoviePic);
-
-     const backGroundImg = `${picUrl}${MoviePic}"`;
-     this.setState({
-     img: backGroundImg
-     })
-
-     });
-     */
-
   }
 
   render() {
@@ -91,7 +77,8 @@ class Root extends React.Component {
 
         return (
           <div className="img-backgrounds root"
-               style={{backgroundImage: img}}>
+               style={{backgroundImage: img}}
+               onLoad={console.info('loaded')}>
             <LetsPlay/>
           </div>
         );
@@ -104,7 +91,9 @@ class Root extends React.Component {
     if (this.props.gameMode === 'playing') {
       return (
         <div className="img-backgrounds root"
-             style={{backgroundImage: img}}>
+             style={{backgroundImage: img}}
+             onLoad={console.info('loaded')}>
+          >
           <Playing/>
         </div>
       )
@@ -113,7 +102,9 @@ class Root extends React.Component {
     if (this.props.gameMode === 'gameover') {
       return (
         <div className="img-backgrounds root"
+             onLoad={console.info('loaded')}
              style={{backgroundImage: img}}>
+          >
           <GameOver/>
         </div>
       )

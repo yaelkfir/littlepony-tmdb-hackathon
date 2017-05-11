@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import TMDB from '../../core/tmdb';
 
 
-class whichMovieIsMorePopular extends React.Component {
+class actorKnownForMovie extends React.Component {
 
   constructor() {
     super();
@@ -12,50 +12,42 @@ class whichMovieIsMorePopular extends React.Component {
       right: null,
       wrong: null,
       question: null,
-      type: 'movie'
     };
 
-    console.info(this.state, 'yo');
+    console.info('constructor actorBestKnowForMovie');
   }
 
   componentDidMount() {
-    this.whichMovieIsMorePopluar();
+    console.info('actorBestKnowForMovie');
+    this.actorBestKnowForMovie();
   }
 
-  whichMovieIsMorePopluar() {
+  actorBestKnowForMovie() {
 
-    const popMovie = '/discover/movie?sort_by=popularity.desc';
+    const apiKey = '24d87d4e264322cbb28c3b1f2a2b3721';
+    const popPerson = `/person/popular?api_key=${apiKey}&language=en-US&page=1`;
 
-    TMDB.get(popMovie)
+    TMDB.get(popPerson)
       .then((data) => {
 
         let indexOne = this.randomNum(19);
         let indexTwo = this.randomNum(19);
         let backUpIndex = this.randomNum(19);
+//.name .profile_path
 
-        let MovieOne = data.results[indexOne];
-        let MovieTwo = data.results[indexTwo];
+        let trueActor = data.results[indexOne];
+        let falseActor = data.results[indexTwo];
+
+        let movie = data.results[indexOne].known_for[this.randomNum(2+1)].title;
 
         if (indexOne === indexTwo) {
-          MovieTwo = data.results[backUpIndex];
+          falseActor = data.results[backUpIndex];
         }
-
-        if (MovieOne.popularity > MovieTwo.popularity) {
-
-          this.setState({
-            right: MovieOne,
-            wrong: MovieTwo,
-            question: `which movie is more popular?`
-          });
-        }
-        else {
-          this.setState({
-            right: MovieTwo,
-            wrong: MovieOne,
-            question: `which movie is more popular?`
-          })
-        }
-
+        this.setState({
+          right: trueActor,
+          wrong: falseActor,
+          question: `which actor is best know for ${movie}?`
+        })
       });
   }
 
@@ -71,11 +63,11 @@ class whichMovieIsMorePopular extends React.Component {
 
       const picUrl = 'url("http://image.tmdb.org/t/p/w185/';
 
-      const wrongName = this.state.wrong.title;
-      const wrongPic = this.state.wrong.poster_path;
+      const wrongName = this.state.wrong.name;
+      const wrongPic = this.state.wrong.profile_path;
 
-      const rightName = this.state.right.title;
-      const rightPic = this.state.right.poster_path;
+      const rightName = this.state.right.name;
+      const rightPic = this.state.right.profile_path;
 
       return (
         <div className="answers-container">
@@ -108,14 +100,13 @@ class whichMovieIsMorePopular extends React.Component {
 
     let counter = Number(this.props.highScore);
 
-    if (e.target.id === this.state.right.poster_path) {
+    if (e.target.id === this.state.right.profile_path) {
       counter = counter + 1;
 
       this.props.setScore(counter);
 
       this.resetStateData();
-      this.props.setNextQuestion('actorBestKnowForMovie');
-
+      this.props.setNextQuestion('MovieMorePopular');
     }
     else {
       this.props.endgame('gameover');
@@ -131,6 +122,7 @@ class whichMovieIsMorePopular extends React.Component {
   }
 
   render() {
+    console.info(this.state.wrong);
     if (this.state.wrong !== null) {
       console.info('Q render', this.state);
 
@@ -200,4 +192,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(whichMovieIsMorePopular);
+export default connect(mapStateToProps, mapDispatchToProps)(actorKnownForMovie);

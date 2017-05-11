@@ -1,8 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import TMDB from '../../core/tmdb';
+
 import Header from '../header/header'
-import Question from '../question-container/question'
 import QuestionTest from '../question-container/questionsTest'
 
 

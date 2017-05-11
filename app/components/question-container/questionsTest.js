@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import MovieIsMorePopular from "../whichMovieIsMorePopular/whichMovieIsMorePopular";
+import KnownForMovie from "../actorBestKnowForMovie/actorBestKnowForMovie";
 
 class QuestionTest extends React.Component {
 
@@ -13,12 +14,16 @@ class QuestionTest extends React.Component {
   }
 
   render() {
-    console.info('question render', this.props.questionTest);
     if (this.props.questionTest === 'MovieMorePopular') {
       return (
-        <div>
           <MovieIsMorePopular/>
-        </div>
+      );
+    }
+
+    if (this.props.questionTest === 'actorBestKnowForMovie') {
+      console.info('question render', this.props.questionTest);
+      return (
+          <KnownForMovie/>
       );
     }
     else {

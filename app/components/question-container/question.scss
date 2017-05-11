@@ -1,0 +1,41 @@
+@import '../../assets/styles/colors';
+
+.question-container{
+  height: calc(100% - 200px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.answers-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.answer{
+  height: 27vw;
+  width: 18vw;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 20px;
+  cursor: pointer;
+}
+
+.answer:hover{
+  border: 3px solid white;
+}
+
+.lest{
+  margin-bottom: 30px;
+}
+
+h3{
+  width: 50vw;
+  text-align: center;
+  font-weight: 300;
+  font-size: 1.6rem;
+  letter-spacing: 0.010rem;
+  margin: 0 auto;
+}

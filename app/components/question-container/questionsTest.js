@@ -1,5 +1,8 @@
+import './question.scss'
+
 import React from 'react';
 import {connect} from 'react-redux';
+
 import MovieIsMorePopular from "../whichMovieIsMorePopular/whichMovieIsMorePopular";
 import KnownForMovie from "../actorBestKnowForMovie/actorBestKnowForMovie";
 

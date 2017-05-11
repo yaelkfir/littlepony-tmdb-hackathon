@@ -1,0 +1,19 @@
+@import '../../assets/styles/colors';
+.game-over{
+  height: 100%;
+  @include linear-gradient(to top,$deepBlue, $bluePurple);
+}
+
+.score-container{
+  height: calc(100% - 120px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.score{
+  font-size: 3rem;
+  text-align: center;
+  margin-top: 70px;
+}

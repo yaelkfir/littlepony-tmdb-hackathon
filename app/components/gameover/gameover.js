@@ -1,3 +1,5 @@
+import './game-over.scss'
+
 import React from 'react';
 import { connect } from 'react-redux';
 import Header from '../header/header'

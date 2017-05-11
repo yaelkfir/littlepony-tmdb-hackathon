@@ -14,8 +14,6 @@ class whichMovieIsMorePopular extends React.Component {
       question: null,
       type: 'movie'
     };
-
-    console.info(this.state, 'yo');
   }
 
   componentDidMount() {
@@ -132,7 +130,6 @@ class whichMovieIsMorePopular extends React.Component {
 
   render() {
     if (this.state.wrong !== null) {
-      console.info('Q render', this.state);
 
       return (
         <div className="question-container">
@@ -144,7 +141,7 @@ class whichMovieIsMorePopular extends React.Component {
       );
     }
     else {
-      console.info('null?');
+
       return (
         <div className="question-container">
           <div className="lest">

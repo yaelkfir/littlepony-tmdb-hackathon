@@ -32,7 +32,8 @@ Thumbs.db
 .vscode
 
 # Build stuff
-
+/dist
+/app/dist
 
 # Testing
 /coverage

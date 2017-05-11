@@ -1,9 +1,18 @@
 @import '../../assets/styles/colors';
 .game-over{
   height: 100%;
-  @include linear-gradient(to top,$deepBlue, $bluePurple);
 }
+.game-over::after{
+  content: '';
+  @include linear-gradient(to top,$deepBlue, $bluePurple);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0.85;
 
+}
 .score-container{
   height: calc(100% - 120px);
   display: flex;

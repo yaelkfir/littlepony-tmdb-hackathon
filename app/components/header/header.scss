@@ -2,13 +2,14 @@
 
 nav{
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   height: 100%;
   line-height: 100px;
 }
 
 header{
   height: 100px;
+  padding: 0 40px;
 }
 
 header .logo{

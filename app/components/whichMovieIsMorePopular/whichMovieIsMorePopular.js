@@ -69,7 +69,7 @@ class whichMovieIsMorePopular extends React.Component {
     if (this.state.wrong !== null) {
       let trueOrFalse = Math.floor(Math.random() * 2);
 
-      const picUrl = 'url("http://image.tmdb.org/t/p/w185/';
+      const picUrl = 'url("http://image.tmdb.org/t/p/w300/';
 
       const wrongName = this.state.wrong.title;
       const wrongPic = this.state.wrong.poster_path;

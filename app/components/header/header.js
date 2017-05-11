@@ -16,8 +16,7 @@ class Header extends React.Component {
         <nav>
           <span className="menu">menu</span>
           <div className="logo"/>
-
-          <span>{`score: ${this.props.highScore}`}</span>
+          <span className="score-header">{`score: ${this.props.highScore}`}</span>
         </nav>
       </header>
     );

@@ -3,6 +3,9 @@ import './root.scss';
 import React from 'react';
 import {connect} from 'react-redux';
 
+import TMDB from '../../core/tmdb';
+
+
 import LetsPlay from '../letsPlay/letsPlay';
 import Playing from '../playing/playing';
 import GameOver from '../gameover/gameover';
@@ -21,6 +24,31 @@ class Root extends React.Component {
   }
 
 
+  getBackImg() {
+    const popMovie = '/discover/movie?sort_by=popularity.desc';
+    const picUrl = 'url("http://image.tmdb.org/t/p/w1000/';
+
+    TMDB.get(popMovie)
+      .then((data) => {
+
+        let index = Math.floor(Math.random() * (19));
+        let Movie = data.results[index];
+        console.info('index', index);
+        console.info('Movie', Movie);
+
+        const MoviePic = Movie.poster_path;
+        console.info('MoviePic', MoviePic);
+
+        const backGroundImg = `${picUrl}${MoviePic}"`;
+        this.setState({
+          img: backGroundImg
+        })
+
+      });
+
+
+  }
+
   render() {
     console.info('render root',this.props.gameMode);
     if (this.props.gameMode === 'lets play') {
@@ -28,7 +56,8 @@ class Root extends React.Component {
       return (
 
         <div className="root">
-          <LetsPlay/>
+          <LetsPlay
+            getBackImg = {this.getBackImg}/>
         </div>
       );
     }

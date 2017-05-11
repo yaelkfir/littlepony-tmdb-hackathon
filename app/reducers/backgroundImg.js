@@ -1,4 +1,4 @@
-const initialData = '271110';
+const initialData = ['271110','118340','135397'];
 
 export default function backImg(data = initialData, action) {
 

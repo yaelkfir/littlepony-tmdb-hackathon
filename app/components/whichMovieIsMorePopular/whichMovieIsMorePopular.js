@@ -110,9 +110,9 @@ class whichMovieIsMorePopular extends React.Component {
       counter = counter + 1;
 
       this.props.setScore(counter);
-
       this.resetStateData();
       this.props.setNextQuestion('actorBestKnowForMovie');
+      
 
     }
     else {
@@ -129,6 +129,7 @@ class whichMovieIsMorePopular extends React.Component {
   }
 
   render() {
+    console.info(this.state.right);
     if (this.state.wrong !== null) {
 
       return (

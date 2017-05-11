@@ -39,7 +39,6 @@ function mapStateToProps({movies, highScore, QuestionTest}) {
     highScore: highScore
   };
 }
-
 function mapDispatchToProps(dispatch) {
   return {
     setQuestion(data) {
@@ -74,4 +73,5 @@ function mapDispatchToProps(dispatch) {
     }
   }
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionTest);

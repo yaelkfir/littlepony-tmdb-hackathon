@@ -27,8 +27,8 @@ nav{
   line-height: 100px;
 }
 .answer{
-  height: 30vw;
-  width: 25vw;
+  height: 27vw;
+  width: 18vw;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -47,7 +47,7 @@ h3{
   width: 50vw;
   text-align: center;
   font-weight: 300;
-  font-size: 1.3rem;
+  font-size: 1.6rem;
   letter-spacing: 0.010rem;
   margin: 0 auto;
 }
@@ -76,7 +76,7 @@ body {
 }
 
 .question-container{
-  height: calc(100% - 120px);
+  height: calc(100% - 200px);
   display: flex;
   flex-direction: column;
   justify-content: center;

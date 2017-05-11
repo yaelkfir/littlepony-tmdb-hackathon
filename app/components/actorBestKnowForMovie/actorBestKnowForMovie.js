@@ -59,7 +59,7 @@ class actorKnownForMovie extends React.Component {
   answersMaker() {
 
     if (this.state.wrong !== null) {
-      let trueOrFalse = Math.floor(Math.random() * 2);
+      let trueOrFalse = this.randomNum(2);
 
       const picUrl = 'url("http://image.tmdb.org/t/p/w185/';
 

@@ -18,7 +18,7 @@ class Root extends React.Component {
 
     this.state = {
       loading: false,
-      img: null
+      img: null,
     }
 
   }
@@ -31,30 +31,26 @@ class Root extends React.Component {
   }
 
   componentDidUpdate(prevProps){
-    console.info('componentDidUpdate');
 
-    console.info('prevProps',prevProps.gameMode);
-    console.info('this.props',this.props.gameMode);
     if(prevProps.gameMode !== this.props.gameMode){
 
       this.getBackImg(prevProps.backImg);
-      console.info('prevProps',prevProps.backImg);
-      console.info('this.props',this.props.backImg);
+
 
 
     }
   }
 
-  getBackImg(prevProps) {
+  getBackImg() {
+//    const popMovie = '/discover/movie?&sort_by=vote_average.desc&vote_count.gte=10';
 
-    const popMovie = '/discover/movie?sort_by=popularity.desc';
+    const popMovie = '/discover/movie?sort_by=popularity.desc&vote_count.gte=10';
 
-    const picUrl = 'url("http://image.tmdb.org/t/p/w500/';
+    const picUrl = 'url("http://image.tmdb.org/t/p/original/';
     let indexOne = this.randomNum(19);
 
     TMDB.get(popMovie)
       .then((data) => {
-        console.info(data);
 
         let Movie = data.results[indexOne];
         const MoviePic = Movie.poster_path;
@@ -67,9 +63,8 @@ class Root extends React.Component {
   }
 
   render() {
-    console.info('render root', this.props.gameMode);
     const img = this.state.img;
-    console.info('backgroundImage',this.props.backImg);
+
 
     if (this.props.gameMode === 'lets play') {
 
@@ -77,7 +72,8 @@ class Root extends React.Component {
 
         return (
           <div className="img-backgrounds root"
-               style={{backgroundImage: img}}
+               style={{backgroundImage: img,
+               opacity:1}}
                onLoad={console.info('loaded')}>
             <LetsPlay/>
           </div>
@@ -91,7 +87,7 @@ class Root extends React.Component {
     if (this.props.gameMode === 'playing') {
       return (
         <div className="img-backgrounds root"
-             style={{backgroundImage: img}}
+             style={{backgroundImage: img,opacity:1}}
              onLoad={console.info('loaded')}>
           >
           <Playing/>
